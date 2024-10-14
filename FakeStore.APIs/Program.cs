@@ -29,8 +29,21 @@ namespace FakeStore.APIs
 
             using  var scope = app.Services.CreateScope();//Group of Services with liftime Scoped
             var services = scope.ServiceProvider; // services itself
-            var dbContext = services.GetRequiredService<FakeStoreDbContext>();//Ask CLR for creating object from context Explicity
-            await  dbContext.Database.MigrateAsync();//Update-Database
+
+            var loggerFactory= services.GetRequiredService<ILoggerFactory>();
+            try
+            {
+
+                var dbContext = services.GetRequiredService<FakeStoreDbContext>();//Ask CLR for creating object from context Explicity
+                await dbContext.Database.MigrateAsync();//Update-Database
+            }
+            catch (Exception ex)
+            {
+                var looger = loggerFactory.CreateLogger<Program>();
+                looger.LogError(ex, "Error during Updating Database");
+
+
+            }
             
 
 
