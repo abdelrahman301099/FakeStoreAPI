@@ -16,7 +16,9 @@ namespace FakeStore.APIs
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddDbContext<FakeStoreDbContext>(options => options.UseSqlServer("DefaultConnection"));
+            builder.Services.AddDbContext<FakeStoreDbContext>(
+                options => options.UseSqlServer("DefaultConnection")
+                );
             
 
             var app = builder.Build();

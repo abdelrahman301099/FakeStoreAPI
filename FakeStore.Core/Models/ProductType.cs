@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FakeStore.Core.Models
 {
-    internal class PruductType:BaseEntity
+    public class ProductType:BaseEntity
     {
         
         public string Name { get; set; }
