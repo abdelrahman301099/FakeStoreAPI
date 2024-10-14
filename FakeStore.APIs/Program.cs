@@ -6,7 +6,7 @@ namespace FakeStore.APIs
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task  Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -17,11 +17,27 @@ namespace FakeStore.APIs
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<FakeStoreDbContext>(
-                options => options.UseSqlServer("DefaultConnection")
+                options => options.UseSqlServer(builder.Configuration.GetConnectionString("mycon"))
                 );
             
 
             var app = builder.Build();
+
+            //Update-Database
+            //FakeStoreDbContext dbContext = new FakeStoreDbContext();
+            //await dbContext.Database.MigrateAsync();
+
+            using  var scope = app.Services.CreateScope();//Group of Services with liftime Scoped
+            var services = scope.ServiceProvider; // services itself
+            var dbContext = services.GetRequiredService<FakeStoreDbContext>();//Ask CLR for creating object from context Explicity
+            await  dbContext.Database.MigrateAsync();//Update-Database
+            
+
+
+
+
+
+
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
