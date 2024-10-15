@@ -21,6 +21,11 @@ namespace FakeStore.Repository
 
         public async Task<IEnumerable<T>> GetAllAsync()
         {
+
+            if (typeof(T) == typeof(Product))
+            {
+                return (IEnumerable<T>) await _dbContext.Products.Include(p=>p.ProductType).Include(p=> p.ProductBrand).ToListAsync();
+            }
             return await _dbContext.Set<T>().ToListAsync();
         }
 
