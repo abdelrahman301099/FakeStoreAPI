@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FakeStore.Repository
 {
-    public static class SpecificationEvalutr<T> where T : BaseEntity
+    public static class SpecificationEvalutor<T> where T : BaseEntity
     {
         //Function To build Queries Dynamically
         public static IQueryable<T> GetQyery(IQueryable<T> inputQuery, ISpecification<T> specification)

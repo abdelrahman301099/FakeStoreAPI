@@ -53,7 +53,7 @@ namespace FakeStore.Repository
 
         private IQueryable<T> ApplySpecification(ISpecification<T> Spec)
         {
-            return  SpecificationEvalutr<T>.GetQyery(_dbContext.Set<T>(), Spec);
+            return  SpecificationEvalutor<T>.GetQyery(_dbContext.Set<T>(), Spec);
 
         }
     }
