@@ -24,5 +24,12 @@ namespace FakeStore.APIs.Controllers
             return Ok(Products);
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Product>> GetProduct(int id)
+        {
+            var Product = await _repository.GetByIdAsync(id);
+            return Ok(Product);
+        }
+
     }
 }
