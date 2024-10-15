@@ -1,5 +1,6 @@
 ﻿using FakeStore.Core.Models;
 using FakeStore.Core.Repositories;
+using FakeStore.Core.Spacifications;
 using FakeStore.Repository.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -25,9 +26,10 @@ namespace FakeStore.Repository
             if (typeof(T) == typeof(Product))
             {
                 return (IEnumerable<T>) await _dbContext.Products.Include(p=>p.ProductType).Include(p=> p.ProductBrand).ToListAsync();
-            }
+            }else
             return await _dbContext.Set<T>().ToListAsync();
         }
+
 
         public async Task<T> GetByIdAsync(int id)
         {
@@ -35,6 +37,24 @@ namespace FakeStore.Repository
             //return await _dbContext.Set<T>().Where(x=> x.Id == id).FirstOrDefaultAsync();
 
             return await _dbContext.Set<T>().FindAsync(id);//Search Localy First
+         }
+
+
+
+        //with Specification
+        public async Task<IEnumerable<T>> GetAllWithSpecificationAsync(ISpecification<T> Spec)
+        {
+            return await ApplySpecification( Spec).ToListAsync();
+        }
+        public async Task<T> GetByIdWithSpecificationAsync(ISpecification<T> Spec)
+        {
+            return await ApplySpecification(Spec).FirstOrDefaultAsync();
+        }
+
+        private IQueryable<T> ApplySpecification(ISpecification<T> Spec)
+        {
+            return  SpecificationEvalutr<T>.GetQyery(_dbContext.Set<T>(), Spec);
+
         }
     }
 }
