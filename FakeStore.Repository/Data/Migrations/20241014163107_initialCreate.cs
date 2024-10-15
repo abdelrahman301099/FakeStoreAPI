@@ -47,7 +47,7 @@ namespace FakeStore.Repository.Data.Migrations
                     PictureUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ProductBrandId = table.Column<int>(type: "int", nullable: false),
-                    PruductTypeId = table.Column<int>(type: "int", nullable: false)
+                    ProductTypeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -59,8 +59,8 @@ namespace FakeStore.Repository.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Products_ProductTypes_PruductTypeId",
-                        column: x => x.PruductTypeId,
+                        name: "FK_Products_ProductTypes_ProductTypeId",
+                        column: x => x.ProductTypeId,
                         principalTable: "ProductTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -72,9 +72,9 @@ namespace FakeStore.Repository.Data.Migrations
                 column: "ProductBrandId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_PruductTypeId",
+                name: "IX_Products_ProductTypeId",
                 table: "Products",
-                column: "PruductTypeId");
+                column: "ProductTypeId");
         }
 
         /// <inheritdoc />

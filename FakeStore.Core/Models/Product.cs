@@ -20,8 +20,8 @@ namespace FakeStore.Core.Models
         public int ProductBrandId { get; set; }
         public ProductBrand ProductBrand { get; set; }
 
-        public int PruductTypeId { get; set; }
-        public  ProductType PruductType { get; set; }
+        public int ProductTypeId { get; set; }
+        public  ProductType ProductType { get; set; }
 
 
     }

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FakeStore.Repository.Data.Migrations
 {
     [DbContext(typeof(FakeStoreDbContext))]
-    [Migration("20241014112913_initialCreate")]
+    [Migration("20241014163107_initialCreate")]
     partial class initialCreate
     {
         /// <inheritdoc />
@@ -50,14 +50,14 @@ namespace FakeStore.Repository.Data.Migrations
                     b.Property<int>("ProductBrandId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PruductTypeId")
+                    b.Property<int>("ProductTypeId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ProductBrandId");
 
-                    b.HasIndex("PruductTypeId");
+                    b.HasIndex("ProductTypeId");
 
                     b.ToTable("Products");
                 });
@@ -104,15 +104,15 @@ namespace FakeStore.Repository.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FakeStore.Core.Models.ProductType", "PruductType")
+                    b.HasOne("FakeStore.Core.Models.ProductType", "ProductType")
                         .WithMany()
-                        .HasForeignKey("PruductTypeId")
+                        .HasForeignKey("ProductTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("ProductBrand");
 
-                    b.Navigation("PruductType");
+                    b.Navigation("ProductType");
                 });
 #pragma warning restore 612, 618
         }

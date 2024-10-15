@@ -36,6 +36,8 @@ namespace FakeStore.APIs
 
                 var dbContext = services.GetRequiredService<FakeStoreDbContext>();//Ask CLR for creating object from context Explicity
                 await dbContext.Database.MigrateAsync();//Update-Database
+
+               await StoreContextSeed.SeedAsync(dbContext);
             }
             catch (Exception ex)
             {
@@ -45,7 +47,7 @@ namespace FakeStore.APIs
 
             }
             
-
+            //Data Seeding
 
 
 

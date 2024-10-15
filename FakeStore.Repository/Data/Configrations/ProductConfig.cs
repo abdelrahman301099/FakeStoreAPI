@@ -16,9 +16,9 @@ namespace FakeStore.Repository.Data.Configrations
                 .WithMany()
                 .HasForeignKey(p => p.ProductBrandId);
 
-            builder.HasOne(p => p.PruductType)
+            builder.HasOne(p => p.ProductType)
                 .WithMany()
-                .HasForeignKey(p => p.PruductTypeId);
+                .HasForeignKey(p => p.ProductTypeId);
 
         }
     }
