@@ -1,4 +1,7 @@
 
+using FakeStore.Core.Models;
+using FakeStore.Core.Repositories;
+using FakeStore.Repository;
 using FakeStore.Repository.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,7 +22,9 @@ namespace FakeStore.APIs
             builder.Services.AddDbContext<FakeStoreDbContext>(
                 options => options.UseSqlServer(builder.Configuration.GetConnectionString("mycon"))
                 );
-            
+
+            //builder.Services.AddScoped<IGenericRepository<Product>, GenericRepository<Product>>();
+            builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
             var app = builder.Build();
 
